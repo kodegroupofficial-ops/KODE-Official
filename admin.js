@@ -141,11 +141,6 @@ async function handleAddNews(e) {
       return;
     }
 
-    if (!newsData.image.trim()) {
-      showAlert(alertContainer, 'Haber görseli URL\'sini giriniz!', 'warning');
-      return;
-    }
-
     // Haber ekle
     const newNews = await addNews(newsData);
 
@@ -290,11 +285,6 @@ async function handleEditNews(e) {
     // Validasyon
     if (!updatedData.title.trim()) {
       showAlert(alertContainer, 'Haber başlığı boş olamaz!', 'warning');
-      return;
-    }
-
-    if (!updatedData.image.trim()) {
-      showAlert(alertContainer, 'Haber görseli URL\'sini giriniz!', 'warning');
       return;
     }
 
