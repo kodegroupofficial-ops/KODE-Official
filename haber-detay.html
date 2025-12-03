@@ -76,10 +76,9 @@
 
   <!-- SCRIPTS -->
   <!-- Firebase SDK -->
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js";
-    import { getFirestore } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore.js";
-
+  <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore.js"></script>
+  <script>
     const firebaseConfig = {
       apiKey: "AIzaSyDUsdH7QQl5RTQybvUuSFRPWiRdKsri7_c",
       authDomain: "kode-7ee97.firebaseapp.com",
@@ -91,8 +90,9 @@
     };
 
     // Initialize Firebase
-    window.firebaseApp = initializeApp(firebaseConfig);
-    window.db = getFirestore(window.firebaseApp);
+    firebase.initializeApp(firebaseConfig);
+    window.db = firebase.firestore();
+    window.firebaseModules = firebase.firestore;
   </script>
   <script src="storage.js"></script>
   <script src="app.js"></script>

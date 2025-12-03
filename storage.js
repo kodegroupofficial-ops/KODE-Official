@@ -2,19 +2,6 @@
 // STORAGE.JS - Firebase Firestore İşlemleri
 // ================================================
 
-// Firebase Firestore işlemleri
-import { 
-  collection, 
-  getDocs, 
-  doc, 
-  getDoc, 
-  addDoc, 
-  updateDoc, 
-  deleteDoc,
-  query,
-  orderBy
-} from "https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore.js";
-
 const COLLECTION_NAME = 'news';
 
 /**
@@ -29,6 +16,7 @@ async function getAllNews() {
       return [];
     }
 
+    const { collection, getDocs, query, orderBy } = window.firebaseModules;
     const q = query(collection(db, COLLECTION_NAME), orderBy('date', 'desc'));
     const querySnapshot = await getDocs(q);
     
@@ -61,6 +49,7 @@ async function getNewsById(id) {
       return null;
     }
 
+    const { doc, getDoc } = window.firebaseModules;
     const docRef = doc(db, COLLECTION_NAME, id);
     const docSnap = await getDoc(docRef);
 
@@ -93,6 +82,8 @@ async function addNews(newsItem) {
       throw new Error('Firebase initialize edilmedi');
     }
 
+    const { collection, addDoc } = window.firebaseModules;
+    
     const newsData = {
       ...newsItem,
       created_at: new Date().toISOString(),
@@ -127,6 +118,7 @@ async function updateNews(id, updatedData) {
       throw new Error('Firebase initialize edilmedi');
     }
 
+    const { doc, updateDoc } = window.firebaseModules;
     const docRef = doc(db, COLLECTION_NAME, id);
     await updateDoc(docRef, updatedData);
 
@@ -155,6 +147,7 @@ async function deleteNews(id) {
       throw new Error('Firebase initialize edilmedi');
     }
 
+    const { doc, deleteDoc } = window.firebaseModules;
     await deleteDoc(doc(db, COLLECTION_NAME, id));
 
     console.log('Haber Firebase\'den silindi');
